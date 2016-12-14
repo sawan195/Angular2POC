@@ -11,5 +11,6 @@ export class LoginComponent{
   register : boolean = true;
   public showRegister(){
     this.register = false;
+
   }
 }
