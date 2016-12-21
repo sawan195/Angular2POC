@@ -21,4 +21,9 @@ export class userServices{
       .map(res => res.json());
   }
 
+  signUp(userDetails: any): Observable<any> {
+    return this.http.post(this.endpoint_url + '/signUp', userDetails)
+      .map(res => res.json());
+  }
+
 }

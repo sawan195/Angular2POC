@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {userServices} from "../services";
+import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -7,15 +8,39 @@ import {userServices} from "../services";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
-  constructor(private userService: userServices) { }
 
-  register : boolean = true;
+  register : boolean = false;
   allUsers = [];
   user = {};
+  myForm: FormGroup;
 
-  public showRegister(){
+  constructor(private formbuilder: FormBuilder,private userService: userServices) {
+    /*this.myForm = new FormGroup({
+     'userData': new FormGroup({
+     'username': new FormControl('Anjali', Validators.required),
+     'email': new FormControl('anjali@gmail.com', [Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")])
+     }),
+     'password': new FormControl('', Validators.required),
+     'gender': new FormControl('male'),
+     'hobbies': new FormArray([
+     new FormControl('Cooking', Validators.required)
+     ])
+     });
+     */
+    this.myForm = formbuilder.group({
+      'firstName': ['',Validators.required],
+      'lastName': ['', Validators.required],
+      'password': ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
+    });
+  }
+
+  showRegister(){
+    this.register = true;
+
+  }
+
+  showLogin() {
     this.register = false;
-
   }
 
   getUsers(){
@@ -30,6 +55,7 @@ export class LoginComponent{
   }
 
   login(userDetails){
+    console.log(userDetails);
     this.userService.login(userDetails)
       .subscribe(
         data =>  {
@@ -39,6 +65,24 @@ export class LoginComponent{
         error => "Something is wrong"
       );
   }
+
+  onSubmit(userDetails) {
+    console.log(userDetails);
+    this.userService.signUp(userDetails)
+      .subscribe(
+        data =>  {
+          console.log(data);
+          alert(data.message);
+          this.reset();
+        },
+        error => "Something is wrong"
+      );
+  }
+
+  reset() {
+    this.myForm.reset();
+  }
+
 
 
 }

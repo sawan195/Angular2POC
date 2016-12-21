@@ -1,22 +1,45 @@
 <div class="login-page">
   <div class="form">
-    <div *ngIf="register">
-      <form class="register-form">
-        <input type="text" placeholder="name"/>
-        <input type="password" placeholder="password"/>
-        <input type="text" placeholder="email address"/>
-        <button>create</button>
-        <p class="message">Already registered? <a href="#">Sign In</a></p>
+    <div *ngIf="register" class="form">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+          <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   id="firstName"
+                   placeholder="First Name"
+                   formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   id="lastName"
+                   placeholder="Last Name"
+                   formControlName="lastName">
+          </div>
+        <div class="form-group">
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 placeholder="Password"
+                 formControlName="password">
+          <div *ngIf="!myForm.get('password').valid">
+            Invalid Password !
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button><br/>
+        <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
+        <p class="message"><a (click)="showLogin()">Login</a></p>
       </form>
     </div>
-    <!--<div *ngIf="!register">-->
-      <form class="login-form">
-        <input type="text" placeholder="username" [(ngModel)]="user.email" name="email"/>
 
+    <div *ngIf="!register">
+      <form>
+        <input type="text" placeholder="username" [(ngModel)]="user.firstName" name="firstName"/>
         <input type="password" placeholder="password" [(ngModel)]="user.password" name="password"/>
         <input type="button" (click)="login(user)" value="login">
         <p class="message">Not registered? <a (click)="showRegister()">Create an account</a></p>
       </form>
-    <!--</div>-->
+    </div>
   </div>
 </div>
