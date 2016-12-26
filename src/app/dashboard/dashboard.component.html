@@ -5,7 +5,8 @@
     </div>
     <div class="col-sm-9">
       <div class="list-group mycontent-right" *ngFor="let msg of messages">
-        <a class="list-group-item"  [ngClass]="{'read-status': msg.readStatus == 1 }">{{msg.firstName }} {{msg.lastName}} : {{ msg.msgText}}</a>
+        <a class="list-group-item"  [ngClass]="{'read-status': msg.readStatus == 1 }">
+          {{msg.firstName }} {{msg.lastName}} : {{ msg.msgText}}</a>
       </div>
     </div>
   </div>
