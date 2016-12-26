@@ -1,0 +1,12 @@
+<div class="container containerView">
+  <div class="row">
+    <div class="col-sm-3 mycontent-left">
+
+    </div>
+    <div class="col-sm-9">
+      <div class="list-group mycontent-right" *ngFor="let msg of messages">
+        <a class="list-group-item"  [ngClass]="{'read-status': msg.readStatus == 1 }">{{msg.firstName }} {{msg.lastName}} : {{ msg.msgText}}</a>
+      </div>
+    </div>
+  </div>
+</div>

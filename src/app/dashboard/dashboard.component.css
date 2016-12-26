@@ -1,0 +1,12 @@
+.containerView {
+  margin-top: 55px;
+}
+
+.mycontent-left {
+  border-right: 1px solid #333;
+  height: 400px;
+}
+
+.read-status {
+  background-color: cornflowerblue;
+}
