@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {userServices} from "../services";
 import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,9 @@ export class LoginComponent{
   allUsers = [];
   user = {};
   myForm: FormGroup;
+  loggedInUserId = "";
 
-  constructor(private formbuilder: FormBuilder,private userService: userServices) {
+  constructor(private formbuilder: FormBuilder,private userService: userServices, private router:Router) {
     /*this.myForm = new FormGroup({
      'userData': new FormGroup({
      'username': new FormControl('Anjali', Validators.required),
@@ -43,16 +45,6 @@ export class LoginComponent{
     this.register = false;
   }
 
-  getUsers(){
-    this.userService.getAllUsers()
-      .subscribe(
-        data =>  {
-          this.allUsers = data;
-          console.log(this.allUsers);
-        },
-        error => "Something is wrong"
-      );
-  }
 
   login(userDetails){
     console.log(userDetails);
@@ -60,7 +52,9 @@ export class LoginComponent{
       .subscribe(
         data =>  {
           console.log(data);
+          this.loggedInUserId = data.id;
           alert(data.message);
+          this.router.navigate(['/dashboard',this.loggedInUserId]);
         },
         error => "Something is wrong"
       );

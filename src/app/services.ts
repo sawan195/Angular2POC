@@ -26,4 +26,14 @@ export class userServices{
       .map(res => res.json());
   }
 
+  getUserInfoById(userId) : Observable<any> {
+    return this.http.get(this.endpoint_url + '/getUserInfoById/'+userId.userId)
+      .map(res => res.json());
+  }
+
+  getMessagesById(userId) : Observable<any> {
+    return this.http.get(this.endpoint_url + '/getMessagesById/'+userId)
+      .map(res => res.json());
+  }
+
 }
