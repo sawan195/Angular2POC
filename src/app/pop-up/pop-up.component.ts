@@ -8,6 +8,7 @@ import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 })
 export class PopUpComponent {
 
+  //constructor
   constructor() { }
 
   @ViewChild('childModal') public childModal: ModalDirective;
