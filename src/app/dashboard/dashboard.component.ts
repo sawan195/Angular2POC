@@ -10,6 +10,7 @@ import {PopUpComponent} from "../pop-up/pop-up.component";
 })
 export class DashboardComponent implements OnInit {
 
+  // Variables declaration
   userId : number;
   allUsers = [];
   messages = [];
