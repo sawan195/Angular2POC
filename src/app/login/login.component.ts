@@ -73,6 +73,8 @@ export class LoginComponent{
       );
   }
 
+
+
   reset() {
     this.myForm.reset();
   }
